@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="x3g-sD-peJ">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Nearby View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="nearbyViewController" customModule="nearbyPOC" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="iRO-Ra-vaS"/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="951" y="281"/>
+        </scene>
+        <!--paymentVC-->
+        <scene sceneID="AkF-ja-5ZT">
+            <objects>
+                <viewController storyboardIdentifier="payment" title="paymentVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="D1g-lM-gns" customClass="PaymentViewController" customModule="nearbyPOC" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DGf-r0-Kvd"/>
+                        <viewControllerLayoutGuide type="bottom" id="oe3-Si-YjW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gAq-gJ-ofG">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p3i-e6-R9i">
+                                <rect key="frame" x="279" y="232" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oQ6-br-2rr">
+                                <rect key="frame" x="279" y="324" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="oe3-Si-YjW" firstAttribute="top" secondItem="oQ6-br-2rr" secondAttribute="bottom" constant="255" id="3NV-m0-u4M"/>
+                            <constraint firstItem="oQ6-br-2rr" firstAttribute="centerX" secondItem="gAq-gJ-ofG" secondAttribute="centerX" id="Lri-8c-J42"/>
+                            <constraint firstItem="oQ6-br-2rr" firstAttribute="leading" secondItem="p3i-e6-R9i" secondAttribute="leading" id="ZIe-yL-Kb7"/>
+                            <constraint firstItem="oQ6-br-2rr" firstAttribute="top" secondItem="p3i-e6-R9i" secondAttribute="bottom" constant="71" id="jyi-A4-lYL"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="nameLabel" destination="p3i-e6-R9i" id="fnk-2U-uPi"/>
+                        <outlet property="recIdLabe" destination="oQ6-br-2rr" id="4yf-El-ddg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iTk-xz-CNw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="795" y="928"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="JcA-Q3-lz8">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="x3g-sD-peJ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dK9-BP-e7R">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="tdx-xX-cSu"/>
+                        <segue destination="D1g-lM-gns" kind="showDetail" identifier="payment" id="BbM-SS-PT0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ry2-9c-BM0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-26" y="943"/>
+        </scene>
+    </scenes>
+</document>
