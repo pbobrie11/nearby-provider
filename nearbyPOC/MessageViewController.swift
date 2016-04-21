@@ -169,6 +169,10 @@ class MessageViewController: UITableViewController {
         NSUserDefaults.standardUserDefaults().setObject(recId, forKey: "payRecId")
     }
     
+    func presentPayment(vc: UIViewController){
+        presentViewController(vc, animated: true, completion: nil)
+    }
+    
     
     // MARK: - UItableViewDelegate
     
@@ -178,8 +182,14 @@ class MessageViewController: UITableViewController {
         changeCellTitle(indexPath.row)
        // formMessageForPayment(indexPath.row)
         setMessageById(indexPath.row)
-        
 
+       // let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        //let payView = delegate.paymentVc
+        // presentPayment(payView)
+        
+        let mainstoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let payvc : UIViewController = mainstoryboard.instantiateViewControllerWithIdentifier("pmt")
+        presentPayment(payvc)
     }
 }
 

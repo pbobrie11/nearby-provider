@@ -9,14 +9,15 @@
 import UIKit
 
 class PaymentViewController: UIViewController {
-
-    @IBOutlet weak var nameLabel: UILabel!
     
-    @IBOutlet weak var recIdLabel: UILabel!
+    @IBOutlet weak var recLabel: UILabel!
+    
+    @IBOutlet weak var nameLabel: UILabel!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         // Do any additional setup after loading the view.
         var provName : AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("id")
@@ -27,9 +28,15 @@ class PaymentViewController: UIViewController {
         var recIdStore : AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("payRecId")
         var recIdStoreString: String = recIdStore as! String
         
-        nameLabel.text = "Poop"
-        recIdLabel.text = "Dollar"
+       /* var nameLabel = UILabel(frame: CGRectMake(0,0,200,21))
+        nameLabel.center = CGPointMake(160, 284)
+        nameLabel.textAlignment = NSTextAlignment.Center
+        nameLabel.text = recIdStoreString
+        self.view.addSubview(nameLabel)
+        */
         
+        recLabel.text = recIdStoreString
+        nameLabel.text = provNameString
         
     }
     

@@ -32,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var subscription: GNSSubscription?
     var navController: UINavigationController!
     var messageViewController: MessageViewController!
+    var paymentVc: PaymentViewController!
     
     
     
@@ -41,6 +42,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navController = UINavigationController(rootViewController: messageViewController)
         window?.rootViewController = navController
         window?.makeKeyAndVisible()
+        
+        paymentVc = PaymentViewController()
+        
         
         // Set up the message view navigation buttons.
         nearbyPermission = GNSPermission(changedHandler: {[unowned self] granted in
@@ -79,6 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
     
     /// Sets up the right bar button to start or stop sharing, depending on current sharing mode.
     func setupStartStopButton() {
