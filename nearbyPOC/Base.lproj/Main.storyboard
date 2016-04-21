@@ -55,17 +55,23 @@
                             <constraint firstItem="9Ar-fa-e55" firstAttribute="centerX" secondItem="gAq-gJ-ofG" secondAttribute="centerX" id="YV9-Ag-gxu"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="7ws-R9-oMR">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel Charge" id="2mc-OX-D2g"/>
+                    <navigationItem key="navigationItem" id="xZi-IQ-9Ny">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Pa2-lR-g4g">
+                            <connections>
+                                <action selector="cancel:" destination="D1g-lM-gns" id="Ps6-3T-eqA"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="nameLabel" destination="GrD-a3-gdA" id="5VH-o3-WAj"/>
                         <outlet property="recLabel" destination="9Ar-fa-e55" id="VNe-os-jYy"/>
+                        <segue destination="l9T-BQ-JYP" kind="unwind" identifier="unwind" unwindAction="unwindToHere:" id="wIB-bp-Vqh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iTk-xz-CNw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="l9T-BQ-JYP" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1763" y="943"/>
+            <point key="canvasLocation" x="2575" y="943"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JcA-Q3-lz8">
@@ -84,6 +90,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ry2-9c-BM0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-26" y="943"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="sLm-2p-f3n">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3Q1-cV-4hU" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6lk-s5-IG7">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="D1g-lM-gns" kind="relationship" relationship="rootViewController" id="Kyd-8x-nj4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XhA-vZ-gve" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1763" y="943"/>
         </scene>
     </scenes>
 </document>

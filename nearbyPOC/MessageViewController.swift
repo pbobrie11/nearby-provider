@@ -173,6 +173,9 @@ class MessageViewController: UITableViewController {
         presentViewController(vc, animated: true, completion: nil)
     }
     
+    @IBAction func unwindToHere(segue: UIStoryboardSegue){
+        
+    }
     
     // MARK: - UItableViewDelegate
     
@@ -187,9 +190,12 @@ class MessageViewController: UITableViewController {
         //let payView = delegate.paymentVc
         // presentPayment(payView)
         
+        
         let mainstoryboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let payvc : UIViewController = mainstoryboard.instantiateViewControllerWithIdentifier("pmt")
-        presentPayment(payvc)
+        let navController : UINavigationController!
+        let navRoot = UINavigationController(rootViewController: payvc)
+        presentPayment(navRoot)
     }
 }
 

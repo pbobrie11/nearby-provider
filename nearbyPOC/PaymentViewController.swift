@@ -14,6 +14,9 @@ class PaymentViewController: UIViewController {
     
     @IBOutlet weak var nameLabel: UILabel!
     
+    @IBAction func cancel(sender: AnyObject) {
+        self.performSegueWithIdentifier("unwind", sender: self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +40,14 @@ class PaymentViewController: UIViewController {
         
         recLabel.text = recIdStoreString
         nameLabel.text = provNameString
+        
+    }
+    
+    func unwindToTable(){
+       // var messageViewController : MessageViewController!
+        //messageViewController = MessageViewController()
+        //presentViewController(messageViewController, animated: true, completion: nil)
+        
         
     }
     
