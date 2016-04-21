@@ -10,26 +10,44 @@ import UIKit
 
 class PaymentViewController: UIViewController {
     
-    @IBOutlet weak var recLabel: UILabel!
+    @IBOutlet weak var messageLabel: UILabel!
     
-    @IBOutlet weak var nameLabel: UILabel!
     
     @IBAction func cancel(sender: AnyObject) {
         self.performSegueWithIdentifier("unwind", sender: self)
     }
     
+    @IBOutlet weak var amtField: UITextField!
+   
+    @IBOutlet weak var sendCharge: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
 
-        // Do any additional setup after loading the view.
+        // Inputs for MESSAGE and Labels
+        
+        //state
+        var state = "2"
+        
+        //content / name (provider)
         var provName : AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("id")
         var provNameString : String = provName as! String
         
+        //devName
         var devName = UIDevice.currentDevice().identifierForVendor!.UUIDString
        
+        //recId == devId of patient
         var recIdStore : AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("payRecId")
         var recIdStoreString: String = recIdStore as! String
+        
+        //amt = from label
+        
+        //-----------------*
+        var payName : AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("payName")
+        var payNameString: String = payName as! String
+        
+        amtField.keyboardType = UIKeyboardType.DecimalPad
         
        /* var nameLabel = UILabel(frame: CGRectMake(0,0,200,21))
         nameLabel.center = CGPointMake(160, 284)
@@ -38,8 +56,14 @@ class PaymentViewController: UIViewController {
         self.view.addSubview(nameLabel)
         */
         
-        recLabel.text = recIdStoreString
-        nameLabel.text = provNameString
+        sendCharge.backgroundColor = UIColor(red: 32.0/255.0, green: 157.0/255.0, blue: 139.0/255.0, alpha: 1.0)
+        sendCharge.layer.cornerRadius = 5
+        sendCharge.layer.borderWidth = 1
+        //sendCharge.te
+        
+        messageLabel.text = "Please enter how much you would like to charge " + payNameString + " below:"
+        
+
         
     }
     

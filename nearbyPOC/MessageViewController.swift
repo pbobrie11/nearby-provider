@@ -165,7 +165,10 @@ class MessageViewController: UITableViewController {
         var name = nameArr[path]
         var recId = devArr[path]
         
-        NSUserDefaults.standardUserDefaults().setObject(name, forKey: "payName")
+        let recArr = name.componentsSeparatedByString(" ")
+        var payName = recArr[1]
+        
+        NSUserDefaults.standardUserDefaults().setObject(payName, forKey: "payName")
         NSUserDefaults.standardUserDefaults().setObject(recId, forKey: "payRecId")
     }
     
