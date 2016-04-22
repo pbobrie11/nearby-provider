@@ -23,7 +23,7 @@ class PaymentViewController: UIViewController {
     
     var state : String = " "
     var provNameString : String = " "
-    var devID : String = " "
+    var devID : String = UIDevice.currentDevice().identifierForVendor!.UUIDString
     var recIdStoreString: String = " "
     var amt : String = " "
     
@@ -91,6 +91,9 @@ class PaymentViewController: UIViewController {
         
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         delegate.sendPayment(sendState, content: sendName, devId: sendDevId, recId: sendRecId, amt: sendAmt)
+        
+        //also dismiss View ftb
+        self.performSegueWithIdentifier("unwind", sender: self)
     }
     
     func formMessageForPayment(path: Int) {
