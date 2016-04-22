@@ -115,9 +115,13 @@ class MessageViewController: UITableViewController {
     }
     
     func removeMessage(message: String!) {
-        if let index = nameArr.indexOf(message)
+        var messArr = message.componentsSeparatedByString(",")
+        var nameToRemove = messArr[1]
+        if let index = nameArr.indexOf(nameToRemove)
         {
             nameArr.removeAtIndex(index)
+            devArr.removeAtIndex(index)
+            recArr.removeAtIndex(index)
         }
         tableView.reloadData()
     }
