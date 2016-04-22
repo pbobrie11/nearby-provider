@@ -21,10 +21,22 @@ class PaymentViewController: UIViewController {
    
     @IBOutlet weak var sendCharge: UIButton!
     
+    var state : String = " "
+    var provNameString : String = " "
+    var devID : String = " "
+    var recIdStoreString: String = " "
+    var amt : String = " "
+    
+    //-------//
+    var payNameString: String = " "
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        messageLabel.sizeToFit()
+        
         // Inputs for MESSAGE and Labels
         
         //state
@@ -32,20 +44,21 @@ class PaymentViewController: UIViewController {
         
         //content / name (provider)
         var provName : AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("id")
-        var provNameString : String = provName as! String
+        provNameString = provName as! String
         
         //devName
         var devName = UIDevice.currentDevice().identifierForVendor!.UUIDString
-       
+        
         //recId == devId of patient
         var recIdStore : AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("payRecId")
-        var recIdStoreString: String = recIdStore as! String
+        recIdStoreString = recIdStore as! String
         
         //amt = from label
         
         //-----------------*
         var payName : AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("payName")
-        var payNameString: String = payName as! String
+        payNameString = payName as! String
+
         
         amtField.keyboardType = UIKeyboardType.DecimalPad
         
@@ -63,16 +76,21 @@ class PaymentViewController: UIViewController {
         
         messageLabel.text = "Please enter how much you would like to charge " + payNameString + " below:"
         
-
+        
+        sendCharge.addTarget(self, action: "sendPaymentMessage:", forControlEvents: .TouchUpInside)
         
     }
     
-    func unwindToTable(){
-       // var messageViewController : MessageViewController!
-        //messageViewController = MessageViewController()
-        //presentViewController(messageViewController, animated: true, completion: nil)
+    
+    func sendPaymentMessage(sender: UIButton!){
+        let sendState = state
+        let sendName = provNameString
+        let sendDevId = devID
+        let sendRecId = recIdStoreString
+        let sendAmt = amt
         
-        
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        delegate.sendPayment(sendState, content: sendName, devId: sendDevId, recId: sendRecId, amt: sendAmt)
     }
     
     func formMessageForPayment(path: Int) {
@@ -82,7 +100,6 @@ class PaymentViewController: UIViewController {
         
         //var completeMessage = name + "," + devName + "," + recId
         
-        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
       //  delegate.sendPayMessage(completeMessage)
     }
 

@@ -151,5 +151,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     self.messageViewController.removeMessage(String(data: message.content, encoding: NSUTF8StringEncoding))                })
         }
     }
+    
+    func sendPayment(state: String, content: String, devId: String, recId: String, amt: String){
+        if let messageMgr = self.messageMgr {
+            
+            let state = state
+            let content = content
+            let devId = devId
+            let recId = recId
+            let amt = amt
+            
+            let messageOne = state + "," + content + ","
+            let messageTwo = devId + "," + recId + "," + amt
+            let fullMessage = messageOne + messageTwo
+            
+            
+            //publish payment message
+            let pubMessage: GNSMessage = GNSMessage(content: fullMessage.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true))
+            publication = messageMgr.publicationWithMessage(pubMessage)
+            
+        }
+    }
 }
 
