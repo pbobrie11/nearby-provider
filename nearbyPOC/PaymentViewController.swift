@@ -72,7 +72,7 @@ class PaymentViewController: UIViewController {
         sendCharge.backgroundColor = UIColor(red: 32.0/255.0, green: 157.0/255.0, blue: 139.0/255.0, alpha: 1.0)
         sendCharge.layer.cornerRadius = 5
         sendCharge.layer.borderWidth = 1
-        //sendCharge.te
+
         
         messageLabel.text = "Please enter how much you would like to charge " + payNameString + " below:"
         
@@ -87,10 +87,13 @@ class PaymentViewController: UIViewController {
         let sendName = provNameString
         let sendDevId = devID
         let sendRecId = recIdStoreString
-        let sendAmt = amt
+        let sendAmt = amtField.text
+        
+        
+        //insert if functiont to handle nil values for amt field below
         
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        delegate.sendPayment(sendState, content: sendName, devId: sendDevId, recId: sendRecId, amt: sendAmt)
+        delegate.sendPayment(sendState, content: sendName, devId: sendDevId, recId: sendRecId, amt: sendAmt!)
         
         //also dismiss View ftb
         self.performSegueWithIdentifier("unwind", sender: self)

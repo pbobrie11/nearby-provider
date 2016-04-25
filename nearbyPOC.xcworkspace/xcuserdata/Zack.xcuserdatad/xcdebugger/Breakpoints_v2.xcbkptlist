@@ -182,7 +182,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "nearbyPOC/AppDelegate.swift"
@@ -193,44 +193,12 @@
             endingLineNumber = "156"
             landmarkName = "sendPayment(_:content:devId:recId:amt:)"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "nearbyPOC.AppDelegate.sendPayment (Swift.String, content : Swift.String, devId : Swift.String, recId : Swift.String, amt : Swift.String) -&gt; ()"
-                  moduleName = "nearbyPOC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Zack/nearby-provider/nearbyPOC/AppDelegate.swift"
-                  timestampString = "483053028.024888"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "156"
-                  endingLineNumber = "156"
-                  offsetFromSymbolStart = "120">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "nearbyPOC.AppDelegate.sendPayment (Swift.String, content : Swift.String, devId : Swift.String, recId : Swift.String, amt : Swift.String) -&gt; ()"
-                  moduleName = "nearbyPOC"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Zack/nearby-provider/nearbyPOC/AppDelegate.swift"
-                  timestampString = "483053028.025015"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "156"
-                  endingLineNumber = "156"
-                  offsetFromSymbolStart = "228">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "nearbyPOC/MessageViewController.swift"
@@ -246,7 +214,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "nearbyPOC/AppDelegate.swift"
