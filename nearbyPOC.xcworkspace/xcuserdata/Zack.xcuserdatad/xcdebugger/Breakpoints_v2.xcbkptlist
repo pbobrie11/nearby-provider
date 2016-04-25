@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "nearbyPOC/MessageViewController.swift"
-            timestampString = "483052385.196801"
+            timestampString = "483306995.894862"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
             landmarkName = "tableView(_:didSelectRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,27 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "nearbyPOC/MessageViewController.swift"
-            timestampString = "483037195.550622"
+            timestampString = "483306995.894862"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "addMessage(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "nearbyPOC/MessageViewController.swift"
-            timestampString = "483037196.090435"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "addMessage(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -201,13 +185,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "nearbyPOC/MessageViewController.swift"
-            timestampString = "483050943.14051"
+            filePath = "nearbyPOC/AppDelegate.swift"
+            timestampString = "483051036.377324"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "addMessage(_:)"
+            startingLineNumber = "141"
+            endingLineNumber = "141"
+            landmarkName = "startSharingWithName(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -217,13 +201,29 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "nearbyPOC/AppDelegate.swift"
-            timestampString = "483051036.377324"
+            filePath = "nearbyPOC/MessageViewController.swift"
+            timestampString = "483306995.894862"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
-            landmarkName = "startSharingWithName(_:)"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "addMessage(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "nearbyPOC/MessageViewController.swift"
+            timestampString = "483306995.894862"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "removeMessage(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

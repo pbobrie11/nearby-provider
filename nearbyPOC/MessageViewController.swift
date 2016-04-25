@@ -40,6 +40,7 @@ class MessageViewController: UITableViewController {
     var nameArr = [String]()
     var devArr = [String]()
     var recArr = [String]()
+    var chargeMessages = [String]()
     
     var messDict = [String: String]()
     
@@ -58,6 +59,9 @@ class MessageViewController: UITableViewController {
     
     var titleMessage = "No Device ID found"
     var displayMessage = "Please Enter Your Device Name or ID"
+    
+    var confirmed = " has confirmed your charge"
+    var declined = " has declined your charge"
     
     
     func checkForId(){
@@ -93,37 +97,64 @@ class MessageViewController: UITableViewController {
     
     func addMessage(message: String) {
         
-        print(nameArr)
+        
         let messArr = message.componentsSeparatedByString(",")
         let state = messArr[0]
         let name = messArr[1]
         let devId = messArr[2]
         let recId = messArr[3]
         let amt = messArr[4]
-       // messDict = ["name": name, "devId": devId, "recId": recId]
+        
+        let myDevId = UIDevice.currentDevice().identifierForVendor!.UUIDString
         
         devArr.append(devId)
         recArr.append(recId)
         
-        print(nameArr)
+        if myDevId == recId {
+            print("repeat ID")
+            checkState(state, name: name)
+        } else {
+            
+        }
         
         let chargeMessage = "Charge " + name
-        nameArr.append(chargeMessage)
+        nameArr.append(name)
+        chargeMessages.append(chargeMessage)
         
         
         tableView.reloadData()
     }
     
+    func checkState(state: String, name: String){
+        if state == "3" {
+            paymentAlert(confirmed, name: name)
+        } else if state == "4" {
+            paymentAlert(declined, name: name)
+        }
+    }
+    
     func removeMessage(message: String!) {
         var messArr = message.componentsSeparatedByString(",")
         var nameToRemove = messArr[1]
+        
         if let index = nameArr.indexOf(nameToRemove)
         {
             nameArr.removeAtIndex(index)
-            devArr.removeAtIndex(index)
             recArr.removeAtIndex(index)
+            devArr.removeAtIndex(index)
         }
         tableView.reloadData()
+    }
+    
+    func paymentAlert(message: String, name: String){
+        let title = name + message
+        
+        let alertController = UIAlertController(title: title, message: displayMessage, preferredStyle: .Alert)
+        let dismiss = UIAlertAction(title: "Dismiss", style: .Cancel, handler: { (action) -> Void in
+        })
+        alertController.addAction(dismiss)
+        
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     // MARK: - UITableViewDataSource
@@ -138,12 +169,13 @@ class MessageViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
-        cell.textLabel?.text = nameArr[indexPath.row]
+        cell.textLabel?.text = chargeMessages[indexPath.row]
         return cell
     }
     
     func changeCellTitle (path : Int) {
-      let title = nameArr[path]
+      let title = chargeMessages[path]
+    
         let chargeCheck = title.componentsSeparatedByString(" ")
         
         if chargeCheck[0] == "Charge" {
