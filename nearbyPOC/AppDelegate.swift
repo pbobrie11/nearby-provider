@@ -10,10 +10,19 @@ import UIKit
 
 var myAPIKey = "AIzaSyDrpWmPjqzVOHZGpX3PC8gB94JTpSqwVCQ"
 
+//the device identifier
+let devId = UIDevice.currentDevice().identifierForVendor!.UUIDString
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
+    
+    var allowNewMessage : Bool = false
+    
+    var initialSent : Bool = false
+    
+    
     
     /**
     * @property
@@ -98,8 +107,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var idCheck: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("id")
         var idString: String = idCheck as! String
         
-        startSharingWithName(idString)
         setupStartStopButton()
+        
+        if initialSent == false {
+            //Set initial message for publication
+            let state = "1"
+            let content = idString
+            let recId = " "
+            let amt = " "
+            
+            var message = Message(state: state, name: content, devId: devId, recId: recId, amt: amt)
+            startSharingWithName(message)
+            initialSent == true
+        }
+        
     }
     
     /// Stops publishing/subscribing.
@@ -111,9 +132,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func sendPayMessage(fullMessage: String) {
+        if allowNewMessage == true {
         if let messMan = self.messageMgr {
             let pubMessage: GNSMessage = GNSMessage(content: fullMessage.dataUsingEncoding(NSUTF8StringEncoding,allowLossyConversion: true))
             publication = messMan.publicationWithMessage(pubMessage)
+        }
+        } else {
+            print("DO NOT ALLOW MESSAGE")
+            //do not send any new payment message to other device
         }
     }
     
@@ -124,20 +150,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     /// Starts publishing the specified name and scanning for nearby devices that are publishing
     /// their names.
-    func startSharingWithName(name: String) {
+    func startSharingWithName(message: Message) {
         if let messageMgr = self.messageMgr {
             // Show the name in the message view title and set up the Stop button.
-            messageViewController.title = name
             
+            messageViewController.title = message.name
+
             
-            //Set initial message for publication
-            let state = "1"
-            let content = name
-            let devId = UIDevice.currentDevice().identifierForVendor!.UUIDString
-            let recId = " "
-            let amt = " "
-            
-            let message = state + "," + content + "," + devId + "," + recId + "," + amt
+            let message = message.formMessageString()
             
             // Publish the name to nearby devices.
             let pubMessage: GNSMessage = GNSMessage(content: message.dataUsingEncoding(NSUTF8StringEncoding,
@@ -151,6 +171,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     self.messageViewController.removeMessage(String(data: message.content, encoding: NSUTF8StringEncoding))                })
         }
     }
+    
     
     func sendPayment(state: String, content: String, devId: String, recId: String, amt: String){
         if let messageMgr = self.messageMgr {

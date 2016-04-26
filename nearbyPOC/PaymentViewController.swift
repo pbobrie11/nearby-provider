@@ -95,6 +95,9 @@ class PaymentViewController: UIViewController {
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         delegate.sendPayment(sendState, content: sendName, devId: sendDevId, recId: sendRecId, amt: sendAmt!)
         
+        //set allowMessages to true
+        delegate.allowNewMessage = true
+        
         //also dismiss View ftb
         self.performSegueWithIdentifier("unwind", sender: self)
     }
@@ -104,9 +107,6 @@ class PaymentViewController: UIViewController {
         var devName = UIDevice.currentDevice().identifierForVendor!.UUIDString
         var recId : AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("payRecId")
         
-        //var completeMessage = name + "," + devName + "," + recId
-        
-      //  delegate.sendPayMessage(completeMessage)
     }
 
     override func didReceiveMemoryWarning() {

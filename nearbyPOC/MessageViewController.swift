@@ -60,8 +60,10 @@ class MessageViewController: UITableViewController {
     var titleMessage = "No Device ID found"
     var displayMessage = "Please Enter Your Device Name or ID"
     
-    var confirmed = " has confirmed your charge"
-    var declined = " has declined your charge"
+    var confirmedStatement = " has confirmed your charge"
+    var declinedStatement = " has declined your charge"
+    var confirmed = "Confirmed"
+    var declined = "Declined"
     
     
     func checkForId(){
@@ -114,12 +116,12 @@ class MessageViewController: UITableViewController {
             print("repeat ID")
             checkState(state, name: name)
         } else {
-            
+            devArr.append(devId)
+            recArr.append(recId)
+            let chargeMessage = "Charge " + name
+            nameArr.append(name)
+            chargeMessages.append(chargeMessage)
         }
-        
-        let chargeMessage = "Charge " + name
-        nameArr.append(name)
-        chargeMessages.append(chargeMessage)
         
         
         tableView.reloadData()
@@ -127,9 +129,9 @@ class MessageViewController: UITableViewController {
     
     func checkState(state: String, name: String){
         if state == "3" {
-            paymentAlert(confirmed, name: name)
+            paymentAlert(confirmedStatement, name: name, result: confirmed)
         } else if state == "4" {
-            paymentAlert(declined, name: name)
+            paymentAlert(declinedStatement, name: name, result:  declined)
         }
     }
     
@@ -146,10 +148,10 @@ class MessageViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    func paymentAlert(message: String, name: String){
-        let title = name + message
+    func paymentAlert(message: String, name: String, result: String){
+        let baseMessage = name + message
         
-        let alertController = UIAlertController(title: title, message: displayMessage, preferredStyle: .Alert)
+        let alertController = UIAlertController(title: result, message: baseMessage, preferredStyle: .Alert)
         let dismiss = UIAlertAction(title: "Dismiss", style: .Cancel, handler: { (action) -> Void in
         })
         alertController.addAction(dismiss)
