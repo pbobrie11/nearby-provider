@@ -39,9 +39,6 @@ class PaymentViewController: UIViewController {
         
         // Inputs for MESSAGE and Labels
         
-        //state
-        var state = "2"
-        
         //content / name (provider)
         var provName : AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("id")
         provNameString = provName as! String
@@ -83,17 +80,16 @@ class PaymentViewController: UIViewController {
     
     
     func sendPaymentMessage(sender: UIButton!){
-        let sendState = state
-        let sendName = provNameString
-        let sendDevId = devID
-        let sendRecId = recIdStoreString
-        let sendAmt = amtField.text
         
+        let sendAmt = amtField.text
+        let state = "2"
         
         //insert if functiont to handle nil values for amt field below
         
+        var message = Message(state: state, name: provNameString, devId: devId, recId: recIdStoreString, amt: sendAmt!)
+        
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        delegate.sendPayment(sendState, content: sendName, devId: sendDevId, recId: sendRecId, amt: sendAmt!)
+        delegate.startSharingWithName(message)
         
         //set allowMessages to true
         delegate.allowNewMessage = true
@@ -102,12 +98,6 @@ class PaymentViewController: UIViewController {
         self.performSegueWithIdentifier("unwind", sender: self)
     }
     
-    func formMessageForPayment(path: Int) {
-        var provName : AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("id")
-        var devName = UIDevice.currentDevice().identifierForVendor!.UUIDString
-        var recId : AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("payRecId")
-        
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

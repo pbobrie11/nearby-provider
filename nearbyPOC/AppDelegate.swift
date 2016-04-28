@@ -148,11 +148,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GNSPermission.setGranted(!GNSPermission.isGranted())
     }
     
+    func refreshPublication(){
+        publication = nil
+        
+    }
+    
     /// Starts publishing the specified name and scanning for nearby devices that are publishing
     /// their names.
     func startSharingWithName(message: Message) {
         if let messageMgr = self.messageMgr {
             // Show the name in the message view title and set up the Stop button.
+            
+            refreshPublication()
             
             messageViewController.title = message.name
 

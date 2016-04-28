@@ -10,6 +10,8 @@ import UIKit
 
 let cellIdentifier = "messageCell"
 
+let myDevId = UIDevice.currentDevice().identifierForVendor!.UUIDString
+
 class MessageViewController: UITableViewController {
     /**
     * @property
@@ -37,12 +39,9 @@ class MessageViewController: UITableViewController {
         }
     }
     
-    var nameArr = [String]()
-    var devArr = [String]()
-    var recArr = [String]()
+    var messArray = [Message]()
     var chargeMessages = [String]()
     
-    var messDict = [String: String]()
     
     //variable to handle name of device / provider
     
@@ -99,27 +98,24 @@ class MessageViewController: UITableViewController {
     
     func addMessage(message: String) {
         
+        var messageToFill = Message(state: " ", name: " ", devId: " ", recId: " ", amt: " ")
         
-        let messArr = message.componentsSeparatedByString(",")
-        let state = messArr[0]
-        let name = messArr[1]
-        let devId = messArr[2]
-        let recId = messArr[3]
-        let amt = messArr[4]
+        let fullMessage = messageToFill.stringToObject(message)
         
-        let myDevId = UIDevice.currentDevice().identifierForVendor!.UUIDString
+        let state = fullMessage.state
+        let name = fullMessage.name
+        let devId = fullMessage.devId
+        let recId = fullMessage.recId
+        let amt = fullMessage.amt
         
-        devArr.append(devId)
-        recArr.append(recId)
         
         if myDevId == recId {
             print("repeat ID")
             checkState(state, name: name)
         } else {
-            devArr.append(devId)
-            recArr.append(recId)
+            messArray.append(fullMessage)
+            
             let chargeMessage = "Charge " + name
-            nameArr.append(name)
             chargeMessages.append(chargeMessage)
         }
         
@@ -139,11 +135,18 @@ class MessageViewController: UITableViewController {
         var messArr = message.componentsSeparatedByString(",")
         var nameToRemove = messArr[1]
         
-        if let index = nameArr.indexOf(nameToRemove)
+        var keyArray = [String]()
+        
+        for keys in messArray {
+            var counter = 0
+            keyArray.append(messArray[counter].name)
+            counter += 1
+        }
+        
+        
+        if let index = keyArray.indexOf(nameToRemove)
         {
-            nameArr.removeAtIndex(index)
-            recArr.removeAtIndex(index)
-            devArr.removeAtIndex(index)
+            messArray.removeAtIndex(index)
         }
         tableView.reloadData()
     }
@@ -166,7 +169,7 @@ class MessageViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return nameArr.count
+        return messArray.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -181,9 +184,9 @@ class MessageViewController: UITableViewController {
         let chargeCheck = title.componentsSeparatedByString(" ")
         
         if chargeCheck[0] == "Charge" {
-            nameArr[path] = "Charging" + " " + chargeCheck[1]
+            chargeMessages[path] = "Charging" + " " + chargeCheck[1]
         } else {
-            nameArr[path] = "Charge" + " " + chargeCheck[1]
+            chargeMessages[path] = "Charge" + " " + chargeCheck[1]
         }
         tableView.reloadData()
     }
@@ -200,14 +203,14 @@ class MessageViewController: UITableViewController {
     }
     */
     func setMessageById(path: Int){
-        var name = nameArr[path]
-        var recId = devArr[path]
         
-        let recArr = name.componentsSeparatedByString(" ")
-        var payName = recArr[1]
+        print(messArray)
+        var name = messArray[path].name
+        var devId = messArray[path].devId
         
-        NSUserDefaults.standardUserDefaults().setObject(payName, forKey: "payName")
-        NSUserDefaults.standardUserDefaults().setObject(recId, forKey: "payRecId")
+        
+        NSUserDefaults.standardUserDefaults().setObject(name, forKey: "payName")
+        NSUserDefaults.standardUserDefaults().setObject(devId, forKey: "payRecId")
     }
     
     func presentPayment(vc: UIViewController){
@@ -222,6 +225,8 @@ class MessageViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        print(indexPath.row)
         
         changeCellTitle(indexPath.row)
        // formMessageForPayment(indexPath.row)
