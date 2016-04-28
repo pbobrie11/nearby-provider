@@ -18,9 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    var allowNewMessage : Bool = false
+    var allowPayment : Bool = false
     
-    var initialSent : Bool = false
+    var allowInitial : Bool = true
     
     
     
@@ -94,6 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
+    
     /// Sets up the right bar button to start or stop sharing, depending on current sharing mode.
     func setupStartStopButton() {
         let isSharing = (publication != nil)
@@ -109,7 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setupStartStopButton()
         
-        if initialSent == false {
+        if allowInitial == true {
             //Set initial message for publication
             let state = "1"
             let content = idString
@@ -117,11 +118,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let amt = " "
             
             var message = Message(state: state, name: content, devId: devId, recId: recId, amt: amt)
-            startSharingWithName(message)
-            initialSent == true
+            checkValidity(message)
         }
         
     }
+    
     
     /// Stops publishing/subscribing.
     func stopSharing() {
@@ -132,6 +133,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func sendPayMessage(fullMessage: String) {
+        var allowNewMessage = false
+        
         if allowNewMessage == true {
         if let messMan = self.messageMgr {
             let pubMessage: GNSMessage = GNSMessage(content: fullMessage.dataUsingEncoding(NSUTF8StringEncoding,allowLossyConversion: true))
@@ -151,6 +154,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func refreshPublication(){
         publication = nil
         
+    }
+    
+    func checkValidity(message: Message) {
+  
+        if message.state == "1" && allowInitial == true {
+            allowInitial = false
+            refreshPublication()
+            startSharingWithName(message)
+        } else if message.state == "2" && allowPayment == true {
+            allowInitial = false
+            allowPayment = false
+            refreshPublication()
+            startSharingWithName(message)
+        } else {
+            print("NOT A VALID MESSAGE TO BE SENT. WILL NOT PUBLISH")
+        }
     }
     
     /// Starts publishing the specified name and scanning for nearby devices that are publishing

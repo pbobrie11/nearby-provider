@@ -88,15 +88,18 @@ class PaymentViewController: UIViewController {
         
         var message = Message(state: state, name: provNameString, devId: devId, recId: recIdStoreString, amt: sendAmt!)
         
+    
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        delegate.startSharingWithName(message)
+
+        delegate.allowPayment = true
         
-        //set allowMessages to true
-        delegate.allowNewMessage = true
+        delegate.checkValidity(message)
+        
         
         //also dismiss View ftb
         self.performSegueWithIdentifier("unwind", sender: self)
     }
+    
     
 
     override func didReceiveMemoryWarning() {
