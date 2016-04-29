@@ -93,22 +93,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    
-    
     /// Sets up the right bar button to start or stop sharing, depending on current sharing mode.
     func setupStartStopButton() {
         let isSharing = (publication != nil)
         messageViewController.rightBarButton = UIBarButtonItem(title: isSharing ? "Stop" : "Start",
-            style: UIBarButtonItemStyle.Bordered,
-            target: self, action: isSharing ? "stopSharing" :  "startSharing")
+                                                               style: UIBarButtonItemStyle.Bordered,
+                                                               target: self, action: isSharing ? "stopSharing" :  "startSharing")
     }
     
     /// Starts sharing with a randomized name.
     func startSharing() {
         var idCheck: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("id")
         var idString: String = idCheck as! String
-        
-        setupStartStopButton()
         
         if allowInitial == true {
             //Set initial message for publication
@@ -119,6 +115,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             var message = Message(state: state, name: content, devId: devId, recId: recId, amt: amt)
             checkValidity(message)
+            
+            setupStartStopButton()
         }
         
     }
@@ -129,6 +127,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         publication = nil
         subscription = nil
         messageViewController.title = ""
+        allowInitial = true
         setupStartStopButton()
     }
     

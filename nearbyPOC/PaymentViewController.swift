@@ -74,19 +74,46 @@ class PaymentViewController: UIViewController {
         messageLabel.text = "Please enter how much you would like to charge " + payNameString + " below:"
         
         
-        sendCharge.addTarget(self, action: "sendPaymentMessage:", forControlEvents: .TouchUpInside)
+        sendCharge.addTarget(self, action: "validateAmt:", forControlEvents: .TouchUpInside)
         
     }
     
-    
-    func sendPaymentMessage(sender: UIButton!){
+    func invalidAmt(){
         
-        let sendAmt = amtField.text
+        let alertController = UIAlertController(title: "Invalid Input", message: "Please input an amount greater than zero or cancel the charge", preferredStyle: .Alert)
+        let dismiss = UIAlertAction(title: "Dismiss", style: .Cancel, handler: { (action) -> Void in
+        })
+        alertController.addAction(dismiss)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func validateAmt(sender: UIButton!){
+        let fieldAmt = amtField.text
+        let amtAsInt : Int? = Int(amtField.text!)
+        let sendAmt : String = " "
+        
+        if fieldAmt?.characters.count > 0 {
+            if amtAsInt != 0 {
+                sendPaymentMessage()
+            } else {
+                invalidAmt()
+            }
+        } else {
+            invalidAmt()
+        }
+
+    }
+    
+    func sendPaymentMessage(){
+        
+        let fieldAmt = amtField.text
+        
         let state = "2"
         
         //insert if functiont to handle nil values for amt field below
         
-        var message = Message(state: state, name: provNameString, devId: devId, recId: recIdStoreString, amt: sendAmt!)
+        var message = Message(state: state, name: provNameString, devId: devId, recId: recIdStoreString, amt: fieldAmt!)
         
     
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
