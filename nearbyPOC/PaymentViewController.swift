@@ -118,7 +118,9 @@ class PaymentViewController: UIViewController {
     
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
 
-        delegate.allowPayment = true
+        delegate.controlState = 1
+        
+        delegate.allowPaymentAlert = true
         
         delegate.checkValidity(message)
         

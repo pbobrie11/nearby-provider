@@ -18,11 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    var allowPayment : Bool = false
+    var controlState : Int = 0
     
-    var allowInitial : Bool = true
-    
-    
+    var allowPaymentAlert : Bool = false
     
     /**
     * @property
@@ -106,7 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var idCheck: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("id")
         var idString: String = idCheck as! String
         
-        if allowInitial == true {
+        if controlState == 0 {
             //Set initial message for publication
             let state = "1"
             let content = idString
@@ -121,13 +119,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
     }
     
-    
     /// Stops publishing/subscribing.
     func stopSharing() {
         publication = nil
         subscription = nil
         messageViewController.title = ""
-        allowInitial = true
+        controlState = 0
         setupStartStopButton()
     }
     
@@ -151,23 +148,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func refreshPublication(){
+        
         publication = nil
         
     }
     
     func checkValidity(message: Message) {
   
-        if message.state == "1" && allowInitial == true {
-            allowInitial = false
+        if message.state == "1" && controlState == 0 {
             refreshPublication()
             startSharingWithName(message)
-        } else if message.state == "2" && allowPayment == true {
-            allowInitial = false
-            allowPayment = false
+        } else if message.state == "2" && controlState == 1 {
             refreshPublication()
             startSharingWithName(message)
-        } else {
-            print("NOT A VALID MESSAGE TO BE SENT. WILL NOT PUBLISH")
         }
     }
     
@@ -216,6 +209,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let pubMessage: GNSMessage = GNSMessage(content: fullMessage.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true))
             publication = messageMgr.publicationWithMessage(pubMessage)
             
+        }
+    }
+    
+    func revert () {
+        var idCheck: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("id")
+        var idString: String = idCheck as! String
+        
+        if controlState == 0 {
+            //Set initial message for publication
+            let state = "1"
+            let content = idString
+            let recId = " "
+            let amt = " "
+            
+            var message = Message(state: state, name: content, devId: devId, recId: recId, amt: amt)
+            checkValidity(message)
         }
     }
 }

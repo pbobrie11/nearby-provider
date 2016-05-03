@@ -41,6 +41,7 @@ class MessageViewController: UITableViewController {
     
     var messArray = [Message]()
     var chargeMessages = [String]()
+    var i = 0
     
     
     //variable to handle name of device / provider
@@ -51,6 +52,7 @@ class MessageViewController: UITableViewController {
         super.viewDidLoad()
         tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: cellIdentifier)
         checkForId()
+        
     }
 
     
@@ -97,6 +99,7 @@ class MessageViewController: UITableViewController {
 
     
     func addMessage(message: String) {
+        var delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         var messageToFill = Message(state: " ", name: " ", devId: " ", recId: " ", amt: " ")
         
@@ -124,10 +127,23 @@ class MessageViewController: UITableViewController {
     }
     
     func checkState(state: String, name: String){
-        if state == "3" {
-            paymentAlert(confirmedStatement, name: name, result: confirmed)
-        } else if state == "4" {
-            paymentAlert(declinedStatement, name: name, result:  declined)
+        var delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        if state == "3" && delegate.allowPaymentAlert == true {
+            
+        paymentAlert(confirmedStatement, name: name, result: confirmed)
+            delegate.controlState = 0
+            delegate.revert()
+            delegate.allowPaymentAlert = false
+            
+        } else if state == "4" && delegate.allowPaymentAlert == true {
+        paymentAlert(declinedStatement, name: name, result:  declined)
+            
+       
+            delegate.controlState = 0
+            delegate.revert()
+            delegate.allowPaymentAlert = false
+            
         }
     }
     
@@ -148,6 +164,10 @@ class MessageViewController: UITableViewController {
         {
             messArray.removeAtIndex(index)
         }
+        
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
+        
         tableView.reloadData()
     }
     
@@ -160,6 +180,9 @@ class MessageViewController: UITableViewController {
         alertController.addAction(dismiss)
         
         presentViewController(alertController, animated: true, completion: nil)
+        
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+       // delegate.revert()
     }
     
     // MARK: - UITableViewDataSource
@@ -221,6 +244,7 @@ class MessageViewController: UITableViewController {
         
     }
     
+    
     // MARK: - UItableViewDelegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -242,6 +266,12 @@ class MessageViewController: UITableViewController {
         let navController : UINavigationController!
         let navRoot = UINavigationController(rootViewController: payvc)
         presentPayment(navRoot)
+        
+        print(messArray[indexPath.row].state)
+        print(messArray[indexPath.row].name)
+        print(messArray[indexPath.row].devId)
+        print(messArray[indexPath.row].recId)
+        print(messArray[indexPath.row].amt)
     }
 }
 
