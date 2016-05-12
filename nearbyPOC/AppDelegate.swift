@@ -52,12 +52,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         paymentVc = PaymentViewController()
         
+        navController.navigationBar.barTintColor = UIColor.whiteColor()
+        
+        //create UI Color used in CC App
+        let uglyBlue = UIColor(colorLiteralRed: 43/255, green: 107/255, blue: 125/255, alpha: 1)
+        
+        let sea = UIColor(colorLiteralRed: 55/255, green: 139/255, blue: 127/255, alpha: 1)
+        
+        //the unattainable font
+        let openSans = UIFont(name: "OpenSans-Semibold", size: 18)
+        
+        navController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : uglyBlue, NSFontAttributeName : openSans!]
+        navController.navigationBar.barTintColor = UIColor.whiteColor()
+        
         
         // Set up the message view navigation buttons.
         nearbyPermission = GNSPermission(changedHandler: {[unowned self] granted in
             self.messageViewController.leftBarButton =
                 UIBarButtonItem(title: String(format: "%@ Nearby", granted ? "Deny" : "Allow"),
                     style: UIBarButtonItemStyle.Bordered, target: self, action: "toggleNearbyPermission")
+            
             })
         setupStartStopButton()
         

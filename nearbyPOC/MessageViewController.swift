@@ -13,6 +13,18 @@ let cellIdentifier = "messageCell"
 let myDevId = UIDevice.currentDevice().identifierForVendor!.UUIDString
 
 class MessageViewController: UITableViewController {
+    
+    let openSans = UIFont(name: "OpenSans-Semibold", size: 16)
+    
+    
+    
+    //create UI Color used in CC App
+    let uglyBlue = UIColor(colorLiteralRed: 43/255, green: 107/255, blue: 125/255, alpha: 1)
+    
+    let sea = UIColor(colorLiteralRed: 55/255, green: 139/255, blue: 127/255, alpha: 1)
+    
+    let lightBlueGrey = UIColor(colorLiteralRed: 213/255, green: 232/255, blue: 236/255, alpha: 1)
+    
     /**
     * @property
     * The left button to use in the nav bar.
@@ -23,6 +35,8 @@ class MessageViewController: UITableViewController {
         }
         set(leftBarButton) {
             navigationItem.leftBarButtonItem = leftBarButton
+            navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: openSans!], forState: .Normal)
+            navigationItem.leftBarButtonItem?.tintColor = uglyBlue
         }
     }
     
@@ -36,6 +50,8 @@ class MessageViewController: UITableViewController {
         }
         set(rightBarButton) {
             navigationItem.rightBarButtonItem = rightBarButton
+            navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: openSans!], forState: .Normal)
+            navigationItem.rightBarButtonItem?.tintColor = uglyBlue
         }
     }
     
@@ -53,6 +69,7 @@ class MessageViewController: UITableViewController {
         tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: cellIdentifier)
         checkForId()
         
+        tableView.separatorColor = lightBlueGrey
     }
 
     
@@ -196,8 +213,23 @@ class MessageViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cgUglyBlue = uglyBlue.CGColor
+        
         let cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
         cell.textLabel?.text = chargeMessages[indexPath.row]
+        
+        var frame = CGRect(x: 333,y: 4,width: 40,height: 40)
+        var imageView = UIImageView(frame: frame)
+        imageView.image = UIImage(named: "cellArrow")
+        
+        cell.textLabel?.textColor = uglyBlue
+        
+        if messArray.isEmpty {
+            cell.willRemoveSubview(imageView)
+        } else {
+            cell.addSubview(imageView)
+        }
+        
         return cell
     }
     
@@ -249,8 +281,7 @@ class MessageViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
-        print(indexPath.row)
+
         
         changeCellTitle(indexPath.row)
        // formMessageForPayment(indexPath.row)

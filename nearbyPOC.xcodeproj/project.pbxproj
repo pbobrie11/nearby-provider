@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1421B1FF1CE1255E00DB6031 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1421B1FE1CE1255500DB6031 /* OpenSans-Semibold.ttf */; };
+		1421B2011CE3B8C800DB6031 /* navController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1421B2001CE3B8C800DB6031 /* navController.swift */; };
 		14553DBE1CCFFA6300FF9B8A /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14553DBD1CCFFA6300FF9B8A /* Message.swift */; };
 		146028181CC7DB4D00C6C313 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 146028171CC7DB4D00C6C313 /* PaymentViewController.swift */; };
 		1460281B1CC7F7BA00C6C313 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 146028191CC7F7BA00C6C313 /* Main.storyboard */; };
@@ -31,6 +33,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1421B1FE1CE1255500DB6031 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		1421B2001CE3B8C800DB6031 /* navController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = navController.swift; sourceTree = "<group>"; };
 		14553DBD1CCFFA6300FF9B8A /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		146028171CC7DB4D00C6C313 /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		1460281A1CC7F7BA00C6C313 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -97,6 +101,7 @@
 				14553DBD1CCFFA6300FF9B8A /* Message.swift */,
 				14ED70CE1CB6EA5900A8001E /* cc.json */,
 				14A6E3821CAC67EB00C27E36 /* getBridgingHeader.m */,
+				1421B2001CE3B8C800DB6031 /* navController.swift */,
 				14A6E3631CAC5AB600C27E36 /* MessageViewController.swift */,
 				14A6E3681CAC5AB600C27E36 /* Assets.xcassets */,
 				146028191CC7F7BA00C6C313 /* Main.storyboard */,
@@ -104,6 +109,7 @@
 				14A6E36A1CAC5AB600C27E36 /* LaunchScreen.storyboard */,
 				14A6E36D1CAC5AB600C27E36 /* Info.plist */,
 				14A6E3811CAC67EB00C27E36 /* nearbyPOC-Bridging-Header.h */,
+				1421B1FE1CE1255500DB6031 /* OpenSans-Semibold.ttf */,
 			);
 			path = nearbyPOC;
 			sourceTree = "<group>";
@@ -223,6 +229,7 @@
 				14ED70CF1CB6EA5900A8001E /* cc.json in Resources */,
 				14A6E3691CAC5AB600C27E36 /* Assets.xcassets in Resources */,
 				1460281B1CC7F7BA00C6C313 /* Main.storyboard in Resources */,
+				1421B1FF1CE1255E00DB6031 /* OpenSans-Semibold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -291,6 +298,7 @@
 				14A6E3641CAC5AB600C27E36 /* MessageViewController.swift in Sources */,
 				14A6E3831CAC67EB00C27E36 /* getBridgingHeader.m in Sources */,
 				14553DBE1CCFFA6300FF9B8A /* Message.swift in Sources */,
+				1421B2011CE3B8C800DB6031 /* navController.swift in Sources */,
 				14A6E3621CAC5AB600C27E36 /* AppDelegate.swift in Sources */,
 				146028181CC7DB4D00C6C313 /* PaymentViewController.swift in Sources */,
 			);

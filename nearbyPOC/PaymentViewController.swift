@@ -10,7 +10,16 @@ import UIKit
 
 class PaymentViewController: UIViewController {
     
+    
+    //navController.navigationBar.barTintColor = UIColor.whiteColor()
+    
     @IBOutlet weak var messageLabel: UILabel!
+    
+    let openSans = UIFont(name: "OpenSans-Semibold", size: 16)
+    
+    let openSansLarge = UIFont(name: "OpenSans-Semibold", size: 20)
+    
+    let uglyBlue = UIColor(colorLiteralRed: 43/255, green: 107/255, blue: 125/255, alpha: 1)
     
     
     @IBAction func cancel(sender: AnyObject) {
@@ -20,6 +29,15 @@ class PaymentViewController: UIViewController {
     @IBOutlet weak var amtField: UITextField!
    
     @IBOutlet weak var sendCharge: UIButton!
+    
+    @IBOutlet weak var line: UIView!
+    
+    
+    //colors
+    
+    let sea = UIColor(colorLiteralRed: 55/255, green: 139/255, blue: 127/255, alpha: 1)
+    
+    let lightBlueGrey = UIColor(colorLiteralRed: 213/255, green: 232/255, blue: 236/255, alpha: 1)
     
     var state : String = " "
     var provNameString : String = " "
@@ -35,7 +53,17 @@ class PaymentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.leftBarButtonItem?.setTitleTextAttributes([NSFontAttributeName: openSans!], forState: .Normal)
+        
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : uglyBlue, NSFontAttributeName : openSans!]
+        
+        navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+        navigationItem.leftBarButtonItem?.tintColor = uglyBlue
+        
+        self.title = "Request a Payment"
+        
         messageLabel.sizeToFit()
+        messageLabel.textColor = uglyBlue
         
         // Inputs for MESSAGE and Labels
         
@@ -66,15 +94,18 @@ class PaymentViewController: UIViewController {
         self.view.addSubview(nameLabel)
         */
         
-        sendCharge.backgroundColor = UIColor(red: 32.0/255.0, green: 157.0/255.0, blue: 139.0/255.0, alpha: 1.0)
+        sendCharge.backgroundColor = sea
         sendCharge.layer.cornerRadius = 5
         sendCharge.layer.borderWidth = 1
+        sendCharge.titleLabel?.font = openSansLarge
 
         
         messageLabel.text = "Please enter how much you would like to charge " + payNameString + " below:"
         
         
         sendCharge.addTarget(self, action: "validateAmt:", forControlEvents: .TouchUpInside)
+        
+        line.backgroundColor = lightBlueGrey
         
     }
     
