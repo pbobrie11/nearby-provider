@@ -50,6 +50,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = navController
         window?.makeKeyAndVisible()
         
+        sleep(4)
+        
         paymentVc = PaymentViewController()
         
         navController.navigationBar.barTintColor = UIColor.whiteColor()
@@ -175,6 +177,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         } else if message.state == "2" && controlState == 1 {
             refreshPublication()
             startSharingWithName(message)
+        } else if message.state == "3" || message.state == "4" {
+            revert()
         }
     }
     

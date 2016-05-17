@@ -107,6 +107,10 @@ class PaymentViewController: UIViewController {
         
         line.backgroundColor = lightBlueGrey
         
+        let logo = UIImage(named: "logo")
+        let logoView = UIImageView(image: logo)
+        self.navigationItem.titleView = logoView
+        
     }
     
     func invalidAmt(){

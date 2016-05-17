@@ -16,6 +16,8 @@ class MessageViewController: UITableViewController {
     
     let openSans = UIFont(name: "OpenSans-Semibold", size: 16)
     
+    let openSansLarge = UIFont(name: "OpenSans-Semibold", size: 22)
+    
     
     
     //create UI Color used in CC App
@@ -70,6 +72,12 @@ class MessageViewController: UITableViewController {
         checkForId()
         
         tableView.separatorColor = lightBlueGrey
+        
+        let logo = UIImage(named: "logo")
+        let logoView = UIImageView(image: logo)
+        self.navigationItem.titleView = logoView
+        
+        self.tableView.rowHeight = CGFloat(80)
     }
 
     
@@ -153,6 +161,7 @@ class MessageViewController: UITableViewController {
             delegate.revert()
             delegate.allowPaymentAlert = false
             
+            changeChargingState()
         } else if state == "4" && delegate.allowPaymentAlert == true {
         paymentAlert(declinedStatement, name: name, result:  declined)
             
@@ -160,8 +169,27 @@ class MessageViewController: UITableViewController {
             delegate.controlState = 0
             delegate.revert()
             delegate.allowPaymentAlert = false
-            
+            changeChargingState()
         }
+    }
+    
+    func changeChargingState() {
+        
+        var index: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("chargeIndex")
+        
+        var path = index as? Int
+        
+        let title = chargeMessages[path!]
+        
+        let chargeCheck = title.componentsSeparatedByString(" ")
+        
+        if chargeCheck[0] == "Charging" {
+            chargeMessages[path!] = "Charge" + " " + chargeCheck[1] + " " + chargeCheck[2]
+        } else {
+            chargeMessages[path!] = "Charging" + " " + chargeCheck[1] + " " + chargeCheck[2]
+        }
+        
+        tableView.reloadData()
     }
     
     func removeMessage(message: String!) {
@@ -218,11 +246,12 @@ class MessageViewController: UITableViewController {
         let cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
         cell.textLabel?.text = chargeMessages[indexPath.row]
         
-        var frame = CGRect(x: 333,y: 4,width: 40,height: 40)
+        var frame = CGRect(x: 650,y: 24,width: 40,height: 40)
         var imageView = UIImageView(frame: frame)
         imageView.image = UIImage(named: "cellArrow")
         
         cell.textLabel?.textColor = uglyBlue
+        cell.textLabel?.font = openSansLarge
         
         if messArray.isEmpty {
             cell.willRemoveSubview(imageView)
@@ -239,10 +268,11 @@ class MessageViewController: UITableViewController {
         let chargeCheck = title.componentsSeparatedByString(" ")
         
         if chargeCheck[0] == "Charge" {
-            chargeMessages[path] = "Charging" + " " + chargeCheck[1]
+            chargeMessages[path] = "Charging" + " " + chargeCheck[1] + " " + chargeCheck[2]
         } else {
-            chargeMessages[path] = "Charge" + " " + chargeCheck[1]
+            chargeMessages[path] = "Charge" + " " + chargeCheck[1] + " " + chargeCheck[2]
         }
+        
         tableView.reloadData()
     }
     
@@ -272,6 +302,10 @@ class MessageViewController: UITableViewController {
         presentViewController(vc, animated: true, completion: nil)
     }
     
+    func currentCharge(path: Int) {
+        NSUserDefaults.standardUserDefaults().setObject(path, forKey: "chargeIndex")
+    }
+    
     @IBAction func unwindToHere(segue: UIStoryboardSegue){
         
     }
@@ -286,6 +320,8 @@ class MessageViewController: UITableViewController {
         changeCellTitle(indexPath.row)
        // formMessageForPayment(indexPath.row)
         setMessageById(indexPath.row)
+        
+        currentCharge(indexPath.row)
 
        // let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         //let payView = delegate.paymentVc
