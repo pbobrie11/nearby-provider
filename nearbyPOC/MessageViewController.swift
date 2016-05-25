@@ -16,7 +16,7 @@ class MessageViewController: UITableViewController {
     
     let openSans = UIFont(name: "OpenSans-Semibold", size: 16)
     
-    let openSansLarge = UIFont(name: "OpenSans-Semibold", size: 22)
+    let openSansLarge = UIFont(name: "OpenSans-Semibold", size: 24)
     
     
     
@@ -63,8 +63,7 @@ class MessageViewController: UITableViewController {
     
     
     //variable to handle name of device / provider
-    
-    var provDict = ["Leo's": "www.google.com", "James'": "www.yahoo.com", "Jeff's": "www.bing.com"]
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +76,7 @@ class MessageViewController: UITableViewController {
         let logoView = UIImageView(image: logo)
         self.navigationItem.titleView = logoView
         
-        self.tableView.rowHeight = CGFloat(80)
+        self.tableView.rowHeight = CGFloat(90)
     }
 
     
@@ -246,7 +245,7 @@ class MessageViewController: UITableViewController {
         let cell: UITableViewCell! = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
         cell.textLabel?.text = chargeMessages[indexPath.row]
         
-        var frame = CGRect(x: 650,y: 24,width: 40,height: 40)
+        var frame = CGRect(x: 675,y: 34,width: 40,height: 40)
         var imageView = UIImageView(frame: frame)
         imageView.image = UIImage(named: "cellArrow")
         
